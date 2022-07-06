@@ -33,10 +33,11 @@ class User < ApplicationRecord
     end
 
     def password=(password)
-        @password = password        #why do we create an ivar for password?
+        @password = password        #why do we create an ivar for password? --because we have a getter @password and we're setting password=
         self.password_digest = BCrypt::Password.create(password)
     end
 
+    # this will run whenever we instantiate a User obj that could happen because we're creating a new record, or because we pulled one out of the database that's why we use conditional assignment
     def ensure_session_token
         self.session_token ||= SecureRandom::urlsafe_base64
     end

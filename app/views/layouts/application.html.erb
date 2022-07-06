@@ -9,8 +9,10 @@
     <!-- <script src="assets/application.js"></script> -->
   </head>
 
+  <body>
+  
   <% if logged_in? %>
-  <h2> Welcome, <%= @current_user.username %>!</h2>
+  <h2> Welcome, <%= current_user.username %>!</h2>
   <form action="<%= session_url %>" method="post">
     <input
       type="hidden"
@@ -28,7 +30,9 @@
     
   <% end %>
 
-  <body>
+  <% flash[:error] %>
+  <% flash[:success] %>
+
     <%= yield %>
   </body>
 </html>

@@ -14,13 +14,15 @@ class SessionsController < ApplicationController
 		    login(@user)
 		    redirect_to cats_url
 	    else
+            flash.now[:error] = "Wrong username/password" #=> we want to render now at the current request
 		    render :new
         end
     end
 
     def destroy
-        logout!
-	    redirect_to new_session_url
+        logout_user!
+        flash[:success] = "You've been logged out successfully"
+	    redirect_to cats_url
     end
 
 end
